@@ -1,4 +1,4 @@
-name: FastAPI CI
+name: CI
 
 on:
   push:
@@ -20,7 +20,12 @@ jobs:
         python-version: "3.10"
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-    - name: Check FastAPI app import
-      run: python -c "from src.main import app; print('OK - app loads')"
+    - name: Set PYTHONPATH
+      run: echo "PYTHONPATH=." >> $GITHUB_ENV
+
+    - name: Verify FastAPI app loads
+      run: python -c "from src.main import app; print('APP OK')"
