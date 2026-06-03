@@ -1,7 +1,7 @@
 from src.state.blogstate import BlogState
 from langchain_core.prompts.chat import ChatPromptTemplate
-
-
+from langchain_core.messages import SystemMessage, HumanMessage
+from src.state.blogstate import Blog
 class BlogNode:
     '''
     A class to represent the blog node
@@ -42,4 +42,55 @@ class BlogNode:
             response = content_chain.invoke({"topic":state["topic"]})
 
             return {"blog":{"content":response.content}}
-            
+        
+    def translation(self,state:BlogState):
+        '''
+        Translate the content to the specified language
+        '''    
+        translation_instruction = """
+                You are a professional translator.
+
+                Translate this blog into {current_language}.
+
+                Return ONLY a valid Blog object.
+
+                Rules:
+                - Do not add explanations
+                - Do not add markdown outside the fields
+                - Keep exactly two keys:
+                title
+                content
+
+                BLOG:
+                {blog_content}
+                """
+
+        blog_content = state["blog"]["content"]
+        prompt = ChatPromptTemplate.from_template(template = translation_instruction)
+ 
+        structure_llm = self.llm.with_structured_output(Blog, method="function_calling")
+
+        translational_chain = prompt|structure_llm
+
+        response = translational_chain.invoke({"current_language":state["current_language"],"blog_content":blog_content})
+        return {
+        "blog": response.model_dump()
+    }
+
+
+    def route(self,state:BlogState):
+            return {"current_language":state["current_language"]}
+
+    def route_decision(self,state:BlogState):
+         '''
+         Route the content to the respective translation function
+         '''   
+
+         if state['current_language']=="hindi":
+              return "hindi"
+         
+         if state["current_language"]=="french":
+              return "french"
+         
+         else:
+              return state["current_language"]
