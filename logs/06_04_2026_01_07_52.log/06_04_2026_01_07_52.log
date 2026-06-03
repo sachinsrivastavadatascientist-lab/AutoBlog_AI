@@ -1,0 +1,12 @@
+[2026-06-04 01:07:52,654] 39 root INFO - starting building graph nodes for language
+[2026-06-04 01:07:52,655] 49 root INFO - starting building graph edgesfor language
+[2026-06-04 01:07:52,655] 56 root INFO - Entering into routing
+[2026-06-04 01:08:13,050] 84 root INFO - starting building graph for  topic and language
+[2026-06-04 01:08:13,051] 39 root INFO - starting building graph nodes for language
+[2026-06-04 01:08:13,051] 49 root INFO - starting building graph edgesfor language
+[2026-06-04 01:08:13,051] 56 root INFO - Entering into routing
+[2026-06-04 01:08:13,063] 23 root INFO - Entering into title creation node
+[2026-06-04 01:08:13,900] 1025 httpx INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-04 01:08:13,912] 43 root INFO - Entering intocontent_generation node
+[2026-06-04 01:08:16,839] 1025 httpx INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-04 01:08:19,716] 1025 httpx INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"

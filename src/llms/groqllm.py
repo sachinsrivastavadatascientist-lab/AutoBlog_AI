@@ -1,6 +1,9 @@
 import os
+import sys
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
+from src.exception import CustomException
+from src.logger import logging
 
 
 class GroqLLM:
@@ -16,6 +19,5 @@ class GroqLLM:
             llm = ChatGroq(model=selected_groq_model, api_key=groq_api_key,temperature=0)  
             
         except Exception as e:
-            raise ValueError(f"Error Occured in groqllm module Wih Exception : {e}")
-
+            raise CustomException(e,sys) from e
         return llm      
