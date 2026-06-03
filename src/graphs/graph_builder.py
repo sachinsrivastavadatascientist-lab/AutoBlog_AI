@@ -14,12 +14,18 @@ class GraphBuilder:
         Build a graph to generate blogs based on topic'''    
 
         # Nodes
-        self.graph.add_node("title_creation",self.blog_node.title_creation)
-        self.graph.add_node("content_generation",self.blog_node.content_generation)
+        self.graph_builder.add_node("title_creation",self.blog_node.title_creation)
+        self.graph_builder.add_node("content_generation",self.blog_node.content_generation)
 
         #Edges
-        self.graph.add_edge(START,"title_creation")
-        self.graph.add_edge("title_creation","content_generation")
-        self.graph.add_edge("content_generation",END)
+        self.graph_builder.add_edge(START,"title_creation")
+        self.graph_builder.add_edge("title_creation","content_generation")
+        self.graph_builder.add_edge("content_generation",END)
 
-        return self.graph.compile() 
+        return self.graph_builder
+
+    def setup_graph(self,usecase):
+        if usecase=="topic":
+            self.build_topic_graph() 
+
+        return self.graph_builder.compile()   
