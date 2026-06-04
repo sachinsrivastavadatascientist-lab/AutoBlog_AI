@@ -26,7 +26,7 @@ jobs:
       - name: Smoke test
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY}}
+          LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
         run: |
           python -c "import app; print('app import ok')"
 
@@ -37,7 +37,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: false
 
     steps:
       - uses: actions/checkout@v4
